@@ -3,7 +3,6 @@ var myApp = angular.module('myApp', []);
 
 myApp.controller('makeController', function($scope, $http) {
   $scope.getModels = function(make) {
-    console.log(make);
     $http({
     method: 'GET',
     url: '/api/models/'+make
@@ -36,13 +35,24 @@ myApp.controller('makeController', function($scope, $http) {
 
     });
   };
-$http({
-  method: 'GET',
-  url: '/api/makes'
-  }).then(function(response) {
-    // this callback will be called asynchronously
-    // when the response is available
-    $scope.makes = response.data.makes;
+  $scope.getStockPhoto = function(make, model, year) {
+    $http({
+      method: 'GET',
+      url: '/api/photos/'+make+'/'+model+'/'+year
+    }).then(function(response) {
+      console.log(response);
+      $scope.photo = response;
+    });
+  };
 
-  });
+  $http({
+    method: 'GET',
+    url: '/api/makes'
+    }).then(function(response) {
+      // this callback will be called asynchronously
+      // when the response is available
+      $scope.makes = response.data.makes;
+
+    });
+
 });

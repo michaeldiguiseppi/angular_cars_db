@@ -35,8 +35,8 @@
             {{ option.name}}
           </option>
       </select>
-      <div class="photo">
-        {{ photo }}
+      <div class="photo" ng-model="photo">
+        <img ng-src={{ photo }} alt="photo" />
       </div>
   </div>
 

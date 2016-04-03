@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "body-parser": "~1.13.2",
+    "cheerio": "^0.20.0",
     "cookie-parser": "~1.3.5",
     "debug": "~2.2.0",
     "dotenv": "^2.0.0",
@@ -14,6 +15,7 @@
     "morgan": "~1.6.1",
     "request": "^2.69.0",
     "serve-favicon": "~2.3.0",
+    "webdriverio": "^4.0.5",
     "xml2js": "^0.4.16"
   },
   "devDependencies": {
