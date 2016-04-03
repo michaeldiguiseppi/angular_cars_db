@@ -11,20 +11,33 @@
   <div class="container">
     <div ng-view></div>
   </div>
-  <div class="container" ng-controller="makeController as make">
-    <div class="container" ng-controller="yearController as year">
-      <select ng-model="yearObj" ng-change="make.getMakes(yearObj)">
-        <option ng-repeat="yearObj in years" value="yearObj">
-          {{ yearObj }}
+    <div class="container" ng-controller="makeController">
+      <select ng-model="make" ng-change="getModels(make)">
+        <option ng-repeat="make in makes" value={{make.name}}>
+          {{ make.name }}
         </option>
       </select>
       <br />
-      <select ng-model="makeObj">
-        <option ng-repeat="makeObj in makes" value="makeObj">
-          {{ makeObj }}
-        </option>
+      <select ng-model="model" ng-change="getYears(make, model)">
+          <option ng-repeat="model in models" value={{model.name}}>
+            {{ model.name }}
+          </option>
       </select>
-    </div>
+      <br />
+      <select ng-model="year" ng-change="getOptions(make, model, year)">
+          <option ng-repeat="year in years" value={{year.year}}>
+            {{ year.year}}
+          </option>
+      </select>
+      <br />
+      <select ng-model="option" ng-change="getStockPhoto(make, model, year)">
+          <option ng-repeat="option in options" value={{option.name}}>
+            {{ option.name}}
+          </option>
+      </select>
+      <div class="photo">
+        {{ photo }}
+      </div>
   </div>
 
 

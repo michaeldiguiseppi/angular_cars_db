@@ -3,44 +3,72 @@ var router = express.Router();
 var parseString = require('xml2js').parseString;
 var request = require('request');
 
-router.get('/years', function(req, res) {
+router.get('/', function(req, res, next) {
+  res.render('index.html');
+});
+
+router.get('/makes', function(req, res, next) {
   var options = { method: 'GET',
-    url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/year'};
+    url: 'https://api.edmunds.com/api/vehicle/v2/makes',
+    qs: { state: 'used', view: 'full', fmt: 'json', api_key: process.env.API_KEY },
+  };
+
 
   request(options, function (error, response, body) {
     if (error) throw new Error(error);
 
-    var yearArray = [];
-    var xml = body;
-    parseString(xml, function (err, result) {
-      result.menuItems.menuItem.forEach(function(year) {
-        yearArray.push(year.text[0]);
-      });
-      return yearArray;
-    });
-    res.json({ years: yearArray });
+    res.send(body);
   });
 });
 
-router.get('/years/:year', function(req, res) {
+router.get('/models/:make', function(req, res, next) {
+  var make = req.params.make;
+  var options = { method: 'GET',
+    url: 'https://api.edmunds.com/api/vehicle/v2/'+make+'/models',
+    qs: { state: 'used', view: 'full', fmt: 'json', api_key: process.env.API_KEY },
+    };
+
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    res.send(body);
+  });
+});
+
+router.get('/years/:make/:model', function(req, res, next) {
+  var make = req.params.make;
+  var model = req.params.model;
+  var options = { method: 'GET',
+    url: 'https://api.edmunds.com/api/vehicle/v2/'+make+'/'+model+'/years',
+    qs: { state: 'used', view: 'full', fmt: 'json', api_key: process.env.API_KEY },
+    };
+
+  request(options, function (error, response, body) {
+    if (error) throw new Error(error);
+
+    res.send(body);
+  });
+});
+
+router.get('/options/:make/:model/:year', function(req, res, next) {
+  var make = req.params.make;
+  var model = req.params.model;
   var year = req.params.year;
-  console.log(year);
   var options = { method: 'GET',
-    url: 'http://www.fueleconomy.gov/ws/rest/vehicle/menu/make?year='+year};
+  url: 'https://api.edmunds.com/api/vehicle/v2/'+make+'/'+model+'/'+year+'/styles',
+  qs: { state: 'used', view: 'full', fmt: 'json', api_key: process.env.API_KEY },
+  };
 
-  request(options, function (error, response, body) {
-    if (error) throw new Error(error);
-    var makeArray = [];
-    var xml = body;
-    parseString(xml, function (err, result) {
-      console.log(result);
-      result.menuItems.menuItem.forEach(function(make) {
-        makeArray.push(make.text[0]);
-      });
-      return makeArray;
-    });
-    res.json({ makes: makeArray });
-  });
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  res.send(body);
 });
+});
+
+
+
+
+
 
 module.exports = router;
