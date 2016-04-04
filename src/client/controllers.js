@@ -40,8 +40,17 @@ myApp.controller('makeController', function($scope, $http) {
       method: 'GET',
       url: '/api/photos/'+make+'/'+model+'/'+year
     }).then(function(response) {
+      console.log('response!', response.data);
+      $scope.photo = response.data;
+    });
+  };
+  $scope.getSccaClasses = function() {
+    $http({
+      method: 'GET',
+      url: '/api/scrape'
+    }).then(function(response) {
       console.log(response);
-      $scope.photo = response;
+      $scope.sccaClasses = response.data;
     });
   };
 

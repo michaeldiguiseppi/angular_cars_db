@@ -6,37 +6,46 @@
   <title>MEAN Boilerplate</title>
   <!-- styles -->
   <link href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/yeti/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./public/css/main.css" />
 </head>
 <body>
-  <div class="container">
-    <div ng-view></div>
-  </div>
     <div class="container" ng-controller="makeController">
-      <select ng-model="make" ng-change="getModels(make)">
-        <option ng-repeat="make in makes" value={{make.niceName}}>
-          {{ make.name }}
-        </option>
-      </select>
-      <br />
-      <select ng-model="model" ng-change="getYears(make, model)">
-          <option ng-repeat="model in models" value={{model.niceName}}>
-            {{ model.name }}
+      <div class="col-lg-6">
+        <select ng-model="make" ng-change="getModels(make)" class="form-control">
+          <option ng-repeat="make in makes" value={{make.niceName}}>
+            {{ make.name }}
           </option>
-      </select>
-      <br />
-      <select ng-model="year" ng-change="getOptions(make, model, year)">
-          <option ng-repeat="year in years" value={{year.year}}>
-            {{ year.year}}
-          </option>
-      </select>
-      <br />
-      <select ng-model="option" ng-change="getStockPhoto(make, model, year)">
-          <option ng-repeat="option in options" value={{option.name}}>
-            {{ option.name}}
-          </option>
-      </select>
-      <div class="photo" ng-model="photo">
-        <img ng-src={{ photo }} alt="photo" />
+        </select>
+        <br />
+        <select ng-model="model" ng-change="getYears(make, model)" class="form-control">
+            <option ng-repeat="model in models" value={{model.niceName}}>
+              {{ model.name }}
+            </option>
+        </select>
+        <br />
+        <select ng-model="year" ng-change="getOptions(make, model, year)" class="form-control">
+            <option ng-repeat="year in years" value={{year.year}}>
+              {{ year.year}}
+            </option>
+        </select>
+        <br />
+        <select ng-model="option" ng-change="getStockPhoto(make, model, year); getSccaClasses()" class="form-control">
+            <option ng-repeat="option in options" value={{option.name}}>
+              {{ option.name}}
+            </option>
+        </select>
+        <br />
+        <br />
+        <div class="photo" ng-model="photo">
+          <img ng-src="{{ photo }}" alt="photo" class="photo"/>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="classes" ng-repeat="class in sccaClasses | orderBy:-class">
+          <p>
+            {{ class }}
+          </p>
+        </div>
       </div>
   </div>
 
