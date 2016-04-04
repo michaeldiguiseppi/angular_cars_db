@@ -74,18 +74,18 @@ router.get('/photos/:make/:model/:year', function(req, res, next) {
   var year = req.params.year;
   console.log('Make: ', make, 'Model: ', model, 'Year: ', year);
   var options = { method: 'GET',
-    url: 'http://www.edmunds.com/bmw/2-series/2016/?sub=m235i&src=1459718761499'
+    url: 'http://www.edmunds.com/'+make+'/'+model+'/'+year
   };
   console.log(options.url);
+  // https://media.ed.edmunds-media.com photo prefix
   request(options, function(error, response, html) {
-    var $ = cheerio.load(html);
-    var a;
-    $('li.current').each(function(i, element){
-      a = $(this).child();
-      console.log(a);
-      return a;
-    });
-    res.send(a);
+    if (error) {
+      throw error;
+
+    }
+      var $ = cheerio.load(html);
+      var photo = $('li.current div.photo-wrap img').src;
+      console.log(photo);
   });
 });
 

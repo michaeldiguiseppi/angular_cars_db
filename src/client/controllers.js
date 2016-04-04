@@ -51,6 +51,7 @@ myApp.controller('makeController', function($scope, $http) {
     }).then(function(response) {
       // this callback will be called asynchronously
       // when the response is available
+      console.log(response.data.makes);
       $scope.makes = response.data.makes;
 
     });

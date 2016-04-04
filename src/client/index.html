@@ -13,13 +13,13 @@
   </div>
     <div class="container" ng-controller="makeController">
       <select ng-model="make" ng-change="getModels(make)">
-        <option ng-repeat="make in makes" value={{make.name}}>
+        <option ng-repeat="make in makes" value={{make.niceName}}>
           {{ make.name }}
         </option>
       </select>
       <br />
       <select ng-model="model" ng-change="getYears(make, model)">
-          <option ng-repeat="model in models" value={{model.name}}>
+          <option ng-repeat="model in models" value={{model.niceName}}>
             {{ model.name }}
           </option>
       </select>
