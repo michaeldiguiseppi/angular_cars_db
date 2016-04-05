@@ -2,6 +2,7 @@
 var myApp = angular.module('myApp', []);
 
 myApp.controller('makeController', function($scope, $http) {
+  $scope.photo = '';
   $scope.getModels = function(make) {
     $http({
     method: 'GET',
