@@ -6,7 +6,6 @@ var cheerio = require('cheerio');
 
 
 
-
 router.get('/', function(req, res, next) {
   res.render('index.html');
 });
@@ -105,12 +104,12 @@ router.get('/scrape', function(req, res) {
   request(url, function(error, response, html) {
     if (!error) {
       var $ = cheerio.load(html);
-      // var makeArray = [];
-      // $('th a').each(function() {
-      //   var data = $(this);
-      //   makeArray.push(data['0'].attribs.name);
-      //   return makeArray;
-      // });
+      var makeArray = [];
+      $('th a').each(function() {
+        var data = $(this);
+        makeArray.push(data['0'].attribs.name);
+
+      });
       var classArray = [];
       $('td').each(function() {
         var data = $(this);
