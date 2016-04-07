@@ -38,18 +38,10 @@
               {{ year.year}}
             </option>
         </select>
-        <select name="scca_class" class="form-control" ng-show="year" ng-model="scca_class">
-          <option disabled selected value="">
-            -- Select a Class --
-          </option>
-            <option ng-repeat="classObj in sccaClasses" value="{{ classObj }}">
-              {{ classObj }}
-            </option>
-        </select>
-        <button class="btn btn-lg btn-info" type="submit">Post</button>
+
         </form>
         <br />
-        <select ng-model="option" ng-change="getStockPhoto(make, model, year); getSccaClasses()" class="form-control" ng-show="year">
+        <select ng-model="option" ng-change="getStockPhoto(make, model, year); getSccaClasses(); getCar(make, model, year)" class="form-control" ng-show="year">
           <option disabled selected value="">
             -- Select Options --
           </option>
@@ -66,7 +58,7 @@
       <div class="col-lg-6">
         <div class="classes" ng-repeat="classObj in sccaClasses | orderBy:-classObj">
           <p>
-            {{ classObj }}
+            <span ng-class="{highlight: classObj == sccaClass}">{{ classObj }}</span>
           </p>
         </div>
       </div>

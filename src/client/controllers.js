@@ -72,6 +72,15 @@ myApp.controller('makeController', function($scope, $http) {
       console.log(response);
     });
   };
+  $scope.getCar = function(make, model, year) {
+    $http({
+      method: 'GET',
+      url: 'http://localhost:9000/car/'+make+'/'+model+'/'+year,
+    }).then(function(response) {
+      console.log(response);
+      $scope.sccaClass = response.data[0].scca_class;
+    });
+  };
   $http({
     method: 'GET',
     url: '/api/makes'

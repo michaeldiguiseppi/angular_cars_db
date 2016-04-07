@@ -10,6 +10,10 @@ a {
   margin: 50px;
 }
 
+.highlight {
+  background-color: yellow;
+}
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
   display: none !important;
 }
