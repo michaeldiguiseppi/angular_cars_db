@@ -11,7 +11,8 @@
 <body ng-cloak>
     <div class="container" ng-controller="makeController">
       <div class="col-lg-6">
-        <select ng-model="make" ng-change="getModels(make)" class="form-control">
+        <form name="carForm" ng-submit="postCarToDb(carForm)">
+        <select ng-model="make" ng-change="getModels(make)" class="form-control" name="make">
           <option disabled selected value="">
             -- Select a Make --
           </option>
@@ -20,7 +21,7 @@
           </option>
         </select>
         <br />
-        <select ng-model="model" ng-change="getYears(make, model)" class="form-control" ng-show="make">
+        <select ng-model="model" ng-change="getYears(make, model)" class="form-control" ng-show="make" name="model">
           <option disabled selected value="">
             -- Select a Model --
           </option>
@@ -29,7 +30,7 @@
             </option>
         </select>
         <br />
-        <select ng-model="year" ng-change="getOptions(make, model, year)" class="form-control" ng-show="model">
+        <select ng-model="year" ng-change="getOptions(make, model, year)" class="form-control" ng-show="model" name="year">
           <option disabled selected value="">
             -- Select a Year --
           </option>
@@ -37,6 +38,16 @@
               {{ year.year}}
             </option>
         </select>
+        <select name="scca_class" class="form-control" ng-show="year" ng-model="scca_class">
+          <option disabled selected value="">
+            -- Select a Class --
+          </option>
+            <option ng-repeat="classObj in sccaClasses" value="{{ classObj }}">
+              {{ classObj }}
+            </option>
+        </select>
+        <button class="btn btn-lg btn-info" type="submit">Post</button>
+        </form>
         <br />
         <select ng-model="option" ng-change="getStockPhoto(make, model, year); getSccaClasses()" class="form-control" ng-show="year">
           <option disabled selected value="">

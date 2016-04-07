@@ -3,8 +3,34 @@ var router = express.Router();
 var parseString = require('xml2js').parseString;
 var request = require('request');
 var cheerio = require('cheerio');
+var fs = require('fs');
+//
+// router.get('/cars', function(req, res, next) {
+//   var url = 'http://localhost:9000/';
+//   request(url, function(error, response, body) {
+//     res.json(JSON.parse(body));
+//   });
+// });
 
-
+// router.post('/cars', function(req, res, next) {
+//   var data = req.body;
+//   console.log('Data: ', data);
+//   var make = data.make.$modelValue;
+//   var model = data.model.$modelValue;
+//   var year = data.year.$modelValue;
+//   var options = {
+//     method: 'POST',
+//     url: 'http://localhost:9000/cars',
+//     data: {
+//       make: make,
+//       model: model,
+//       year: year,
+//     }
+//   };
+//   request({method: 'POST', url: options.url, formData: options.data}, function(response) {
+//     console.log(response);
+//   });
+// });
 
 router.get('/', function(req, res, next) {
   res.render('index.html');

@@ -41,7 +41,6 @@ myApp.controller('makeController', function($scope, $http) {
       method: 'GET',
       url: '/api/photos/'+make+'/'+model+'/'+year
     }).then(function(response) {
-      console.log('response!', response.data);
       $scope.photo = response.data;
     });
   };
@@ -50,18 +49,35 @@ myApp.controller('makeController', function($scope, $http) {
       method: 'GET',
       url: '/api/scrape'
     }).then(function(response) {
-      console.log(response);
       $scope.sccaClasses = response.data;
     });
   };
+  $scope.postCarToDb = function(body) {
+    console.log(body);
+    var make = body.make.$modelValue;
+    var model = body.model.$modelValue;
+    var year = body.year.$modelValue;
+    var scca_class = body.scca_class.$modelValue;
 
+    $http({
+      method: 'POST',
+      url: 'http://localhost:9000/cars',
+      data: {
+        make: make,
+        model: model,
+        year: year,
+        scca_class: scca_class,
+      },
+    }).then(function(response) {
+      console.log(response);
+    });
+  };
   $http({
     method: 'GET',
     url: '/api/makes'
     }).then(function(response) {
       // this callback will be called asynchronously
       // when the response is available
-      console.log(response.data.makes);
       $scope.makes = response.data.makes;
 
     });
